@@ -1,0 +1,41 @@
+package de.tuhrig.neo4j.infrastructure;
+
+import de.tuhrig.neo4j.domain.Product;
+import de.tuhrig.neo4j.domain.ProductRepository;
+import de.tuhrig.neo4j.domain.ProductSummary;
+import de.tuhrig.neo4j.ports.ProductController;
+import org.springframework.data.neo4j.core.Neo4jTemplate;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
+@Service
+public class ProductRepositoryAdapter implements ProductRepository {
+
+    private final Neo4jTemplate neo4jTemplate;
+    private final Neo4JProductRepository neo4JProductRepository;
+
+    public ProductRepositoryAdapter(
+            Neo4jTemplate neo4jTemplate,
+            Neo4JProductRepository neo4JProductRepository
+    ) {
+        this.neo4jTemplate = neo4jTemplate;
+        this.neo4JProductRepository = neo4JProductRepository;
+    }
+
+
+    @Override
+    public void save(Product product) {
+        neo4JProductRepository.save(product);
+    }
+
+    @Override
+    public void save(ProductController.ProductDto dto) {
+        neo4jTemplate.save(Product.class).one(dto);
+    }
+
+    @Override
+    public Optional<ProductSummary> find(String sku) {
+        return neo4JProductRepository.findBySku(sku);
+    }
+}
