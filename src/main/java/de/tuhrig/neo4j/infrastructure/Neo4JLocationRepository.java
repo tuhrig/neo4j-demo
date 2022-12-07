@@ -5,6 +5,6 @@ import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface LocationRepository extends Neo4jRepository<Location, String> {
-    //
+public interface Neo4JLocationRepository extends Neo4jRepository<Location, Long> {
+    // Neo4J generated proxy
 }

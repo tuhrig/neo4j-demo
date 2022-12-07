@@ -9,7 +9,7 @@ import java.util.Optional;
 
 @Repository
 interface Neo4JProductRepository extends Neo4jRepository<Product, String> {
-    //
+    // Neo4J generated proxy
 
     Optional<ProductSummary> findBySku(String sku);
 }

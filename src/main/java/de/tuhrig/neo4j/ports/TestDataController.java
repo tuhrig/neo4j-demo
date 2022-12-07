@@ -26,12 +26,12 @@ public class TestDataController {
         var edeka = new Shop("edeka", "EDEKA");
         var atu = new Shop("atu", "ATU");
 
-        atu.locatedAt(new Location("atu-l-1", "Hauptstraße", "1b", "Stuttgart"));
-        atu.locatedAt(new Location("atu-l-2", "Nebenweg", "5", "Karlsruhe"));
+        atu.locatedAt(new Location("Hauptstraße", "1b", "Stuttgart"));
+        atu.locatedAt(new Location("Nebenweg", "5", "Karlsruhe"));
 
-        edeka.locatedAt(new Location("edeka-l-1", "Hauptstraße", "2b", "Stuttgart"));
+        edeka.locatedAt(new Location("Hauptstraße", "2b", "Stuttgart"));
 
-        mediaMarkt.locatedAt(new Location("media-l-1", "Gasse", "42", "Berlin"));
+        mediaMarkt.locatedAt(new Location("Gasse", "42", "Berlin"));
 
         var dellLaptop = new Product("10001", "Dell Laptop", "Brand new Dell Laptop!");
         var usbCabel = new Product("20001", "USB Cabel", "USB Cabel (1 meter)");

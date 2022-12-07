@@ -2,6 +2,7 @@ package de.tuhrig.neo4j.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 
@@ -11,7 +12,8 @@ import org.springframework.data.neo4j.core.schema.Node;
 public class Location {
 
     @Id
-    private String id;
+    @GeneratedValue
+    private Long id;
 
     private String street;
     private String houseNumber;
@@ -22,12 +24,10 @@ public class Location {
     }
 
     public Location(
-            String id,
             String street,
             String houseNumber,
             String city
     ) {
-        this.id = id;
         this.street = street;
         this.houseNumber = houseNumber;
         this.city = city;
