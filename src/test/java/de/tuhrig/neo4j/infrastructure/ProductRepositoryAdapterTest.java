@@ -1,6 +1,8 @@
 package de.tuhrig.neo4j.infrastructure;
 
 import de.tuhrig.neo4j.domain.Product;
+import de.tuhrig.neo4j.domain.Shop;
+import de.tuhrig.neo4j.ports.ProductController;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -54,6 +56,27 @@ class ProductRepositoryAdapterTest {
         var result = productRepository.find("10001");
 
         assertThat(result.isPresent()).isTrue();
+    }
+
+    @Test
+    void should_only_update_name() {
+        var mediaMarkt = new Shop("media_markt", "Media Markt");
+        var dellLaptop = new Product("10001", "Dell Laptop", "Brand new Dell Laptop!");
+        dellLaptop.soldBy(mediaMarkt);
+        
+        productRepository.save(dellLaptop);
+
+        var before = productRepository.findBySku("10001");
+        assertThat(before).isPresent();
+        assertThat(before.get().getShops()).hasSize(1);
+        assertThat(before.get().getName()).isEqualTo("Dell Laptop");
+
+        productRepository.save(new ProductController.ProductDto("10001", "New Name!"));
+
+        var after = productRepository.findBySku("10001");
+        assertThat(after).isPresent();
+        assertThat(after.get().getShops()).hasSize(1); // Not updated! Still Media Markt!
+        assertThat(after.get().getName()).isEqualTo("New Name!"); // Updated!
     }
 }
 

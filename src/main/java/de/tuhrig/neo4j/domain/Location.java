@@ -1,13 +1,13 @@
 package de.tuhrig.neo4j.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor // Empty constructor required as of Neo4j API 2.0.5
 @Node("location")
 public class Location {
 
@@ -18,10 +18,6 @@ public class Location {
     private String street;
     private String houseNumber;
     private String city;
-
-    private Location() {
-        // Empty constructor required as of Neo4j API 2.0.5
-    }
 
     public Location(
             String street,

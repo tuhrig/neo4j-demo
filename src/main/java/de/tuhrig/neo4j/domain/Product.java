@@ -1,7 +1,7 @@
 package de.tuhrig.neo4j.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
@@ -9,8 +9,8 @@ import org.springframework.data.neo4j.core.schema.Relationship;
 import java.util.HashSet;
 import java.util.Set;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor // Empty constructor required as of Neo4j API 2.0.5
 @Node("product")
 public class Product {
 
@@ -29,10 +29,6 @@ public class Product {
 
     @Relationship(type = "REQUIRES")
     private Set<Product> requiredProducts = new HashSet<>();
-
-    private Product() {
-        // Empty constructor required as of Neo4j API 2.0.5
-    }
 
     public Product(String sku, String name, String description) {
         this.sku = sku;

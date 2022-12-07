@@ -51,7 +51,7 @@ public class ProductController {
 
     @Data
     public static class ProductDto {
-        private String sku;
-        private String name;
+        private final String sku;
+        private final String name;
     }
 }

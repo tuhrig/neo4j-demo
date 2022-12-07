@@ -24,3 +24,10 @@ model can be implemented with some basic use-cases.
 ## Run the tests
 
     ./gradlew check
+
+## Login to Neo4J Web Console
+
+    http://localhost:7474/browser/
+    With: neo4j / neo4j
+
+See: https://hub.docker.com/_/neo4j

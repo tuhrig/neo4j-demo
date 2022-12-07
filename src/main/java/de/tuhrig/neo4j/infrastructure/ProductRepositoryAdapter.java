@@ -38,4 +38,8 @@ public class ProductRepositoryAdapter implements ProductRepository {
     public Optional<ProductSummary> find(String sku) {
         return neo4JProductRepository.findBySku(sku);
     }
+
+    public Optional<Product> findBySku(String sku) {
+        return neo4JProductRepository.findById(sku);
+    }
 }
