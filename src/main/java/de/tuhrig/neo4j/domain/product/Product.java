@@ -1,6 +1,8 @@
-package de.tuhrig.neo4j.domain;
+package de.tuhrig.neo4j.domain.product;
 
+import de.tuhrig.neo4j.domain.shop.Shop;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
@@ -12,9 +14,11 @@ import java.util.Set;
 @Data
 @NoArgsConstructor // Empty constructor required as of Neo4j API 2.0.5
 @Node("product")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Product {
 
     @Id
+    @EqualsAndHashCode.Include
     private String sku;
 
     private String name;

@@ -1,9 +1,9 @@
 package de.tuhrig.neo4j.ports;
 
-import de.tuhrig.neo4j.domain.Location;
-import de.tuhrig.neo4j.domain.Product;
-import de.tuhrig.neo4j.domain.ProductRepository;
-import de.tuhrig.neo4j.domain.Shop;
+import de.tuhrig.neo4j.domain.location.Location;
+import de.tuhrig.neo4j.domain.product.Product;
+import de.tuhrig.neo4j.domain.product.ProductRepository;
+import de.tuhrig.neo4j.domain.shop.Shop;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PutMapping;

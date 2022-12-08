@@ -1,8 +1,8 @@
 package de.tuhrig.neo4j.infrastructure;
 
-import de.tuhrig.neo4j.domain.Product;
-import de.tuhrig.neo4j.domain.ProductRepository;
-import de.tuhrig.neo4j.domain.ProductSummary;
+import de.tuhrig.neo4j.domain.product.Product;
+import de.tuhrig.neo4j.domain.product.ProductRepository;
+import de.tuhrig.neo4j.domain.product.ProductSummary;
 import de.tuhrig.neo4j.ports.ProductController;
 import org.springframework.data.neo4j.core.Neo4jTemplate;
 import org.springframework.stereotype.Service;

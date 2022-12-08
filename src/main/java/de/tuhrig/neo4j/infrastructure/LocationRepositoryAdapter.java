@@ -1,7 +1,7 @@
 package de.tuhrig.neo4j.infrastructure;
 
-import de.tuhrig.neo4j.domain.Location;
-import de.tuhrig.neo4j.domain.LocationRepository;
+import de.tuhrig.neo4j.domain.location.Location;
+import de.tuhrig.neo4j.domain.location.LocationRepository;
 import de.tuhrig.neo4j.ports.LocationController;
 import org.springframework.data.neo4j.core.Neo4jTemplate;
 import org.springframework.stereotype.Service;

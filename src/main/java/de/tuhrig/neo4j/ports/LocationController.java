@@ -1,7 +1,7 @@
 package de.tuhrig.neo4j.ports;
 
-import de.tuhrig.neo4j.domain.Location;
-import de.tuhrig.neo4j.domain.LocationRepository;
+import de.tuhrig.neo4j.domain.location.Location;
+import de.tuhrig.neo4j.domain.location.LocationRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.slf4j.Logger;

@@ -1,4 +1,4 @@
-package de.tuhrig.neo4j.domain;
+package de.tuhrig.neo4j.domain.location;
 
 import de.tuhrig.neo4j.ports.LocationController.LocationDto;
 

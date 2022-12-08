@@ -1,7 +1,7 @@
 package de.tuhrig.neo4j.infrastructure;
 
-import de.tuhrig.neo4j.domain.Product;
-import de.tuhrig.neo4j.domain.Shop;
+import de.tuhrig.neo4j.domain.product.Product;
+import de.tuhrig.neo4j.domain.shop.Shop;
 import de.tuhrig.neo4j.ports.ProductController;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -63,7 +63,7 @@ class ProductRepositoryAdapterTest {
         var mediaMarkt = new Shop("media_markt", "Media Markt");
         var dellLaptop = new Product("10001", "Dell Laptop", "Brand new Dell Laptop!");
         dellLaptop.soldBy(mediaMarkt);
-        
+
         productRepository.save(dellLaptop);
 
         var before = productRepository.findBySku("10001");

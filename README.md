@@ -25,6 +25,10 @@ model can be implemented with some basic use-cases.
 
     ./gradlew check
 
+## Docs
+
+    http://localhost:8080/swagger-ui/index.html
+
 ## Login to Neo4J Web Console
 
     http://localhost:7474/browser/

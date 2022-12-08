@@ -1,7 +1,7 @@
 package de.tuhrig.neo4j.ports;
 
-import de.tuhrig.neo4j.domain.ProductRepository;
-import de.tuhrig.neo4j.domain.ProductSummary;
+import de.tuhrig.neo4j.domain.product.ProductRepository;
+import de.tuhrig.neo4j.domain.product.ProductSummary;
 import lombok.Data;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.Session;

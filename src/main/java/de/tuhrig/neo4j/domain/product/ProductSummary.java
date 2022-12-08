@@ -1,4 +1,4 @@
-package de.tuhrig.neo4j.domain;
+package de.tuhrig.neo4j.domain.product;
 
 import java.util.Set;
 
