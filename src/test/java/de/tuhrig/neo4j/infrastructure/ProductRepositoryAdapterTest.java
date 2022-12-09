@@ -50,7 +50,11 @@ class ProductRepositoryAdapterTest {
 
     @Test
     void should_save_product() {
-        var dellLaptop = new Product("10001", "Dell Laptop", "Brand new Dell Laptop!");
+        var dellLaptop = Product.builder()
+                .sku("10001")
+                .name("Dell Laptop")
+                .description("Brand new Dell Laptop!")
+                .build();
         productRepository.save(dellLaptop);
 
         var result = productRepository.find("10001");
@@ -61,8 +65,12 @@ class ProductRepositoryAdapterTest {
     @Test
     void should_only_update_name() {
         var mediaMarkt = new Shop("media_markt", "Media Markt");
-        var dellLaptop = new Product("10001", "Dell Laptop", "Brand new Dell Laptop!");
-        dellLaptop.soldBy(mediaMarkt);
+        var dellLaptop = Product.builder()
+                .sku("10001")
+                .name("Dell Laptop")
+                .description("Brand new Dell Laptop!")
+                .shop(mediaMarkt)
+                .build();
 
         productRepository.save(dellLaptop);
 

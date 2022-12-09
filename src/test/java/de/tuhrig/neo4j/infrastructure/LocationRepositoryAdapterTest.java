@@ -1,6 +1,5 @@
 package de.tuhrig.neo4j.infrastructure;
 
-import de.tuhrig.neo4j.ports.LocationController;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -48,8 +47,7 @@ class LocationRepositoryAdapterTest {
 
     @Test
     void should_save_location_from_dto() {
-        var locationToSave = new LocationController.LocationDto("Mainstreet", "42", "Berlin");
-        var id = locationRepository.save(locationToSave);
+        var id = locationRepository.save("Mainstreet", "42", "Berlin");
 
         var result = locationRepository.findAll();
 

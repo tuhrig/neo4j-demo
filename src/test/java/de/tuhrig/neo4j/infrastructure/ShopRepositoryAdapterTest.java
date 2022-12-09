@@ -2,7 +2,6 @@ package de.tuhrig.neo4j.infrastructure;
 
 import de.tuhrig.neo4j.domain.location.LocationRepository;
 import de.tuhrig.neo4j.domain.shop.Shop;
-import de.tuhrig.neo4j.ports.LocationController.LocationDto;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -58,7 +57,7 @@ class ShopRepositoryAdapterTest {
     void should_append_existing_location() {
 
         shopRepository.save(new Shop("media_markt", "Media Markt"));
-        var id = locationRepository.save(new LocationDto("Mainstreet", "4", "Karlsruhe"));
+        var id = locationRepository.save("Mainstreet", "4", "Karlsruhe");
 
         shopRepository.appendLocation("media_markt", id);
 

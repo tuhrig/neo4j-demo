@@ -2,7 +2,6 @@ package de.tuhrig.neo4j.infrastructure;
 
 import de.tuhrig.neo4j.domain.location.Location;
 import de.tuhrig.neo4j.domain.location.LocationRepository;
-import de.tuhrig.neo4j.ports.LocationController;
 import org.springframework.data.neo4j.core.Neo4jTemplate;
 import org.springframework.stereotype.Service;
 
@@ -28,8 +27,8 @@ public class LocationRepositoryAdapter implements LocationRepository {
     }
 
     @Override
-    public Long save(LocationController.LocationDto dto) {
-        var location = new Location(dto.getStreet(), dto.getHouseNumber(), dto.getCity());
+    public String save(String street, String houseNumber, String city) {
+        var location = new Location(street, houseNumber, city);
         var saved = neo4JLocationRepository.save(location);
         return saved.getId();
     }

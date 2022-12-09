@@ -3,8 +3,6 @@ package de.tuhrig.neo4j.ports;
 import de.tuhrig.neo4j.domain.shop.Shop;
 import de.tuhrig.neo4j.domain.shop.ShopRepository;
 import lombok.Data;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +15,6 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 public class ShopController {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final ShopRepository shopRepository;
 
     public ShopController(
@@ -39,6 +36,6 @@ public class ShopController {
     @Data
     static class AppendLocationDto {
         private String shopId;
-        private Long locationId;
+        private String locationId;
     }
 }

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
+import org.springframework.data.neo4j.core.support.UUIDStringGenerator;
 
 @Data
 @NoArgsConstructor // Empty constructor required as of Neo4j API 2.0.5
@@ -14,9 +15,9 @@ import org.springframework.data.neo4j.core.schema.Node;
 public class Location {
 
     @Id
-    @GeneratedValue
     @EqualsAndHashCode.Include
-    private Long id;
+    @GeneratedValue(UUIDStringGenerator.class)
+    private String id;
 
     private String street;
     private String houseNumber;

@@ -22,11 +22,11 @@ public class ShopRepositoryAdapter implements ShopRepository {
     }
 
     @Override
-    public void appendLocation(String shopId, Long locationId) {
+    public void appendLocation(String shopId, String locationId) {
         var query = """
                 MATCH (s:shop)
                 MATCH (l:location)
-                WHERE s.id = '%s' AND ID(l) = %s
+                WHERE s.id = '%s' AND l.id = '%s'
                 MERGE (s)-[:LOCATED_AT]->(l)
                 RETURN *
                 """.formatted(shopId, locationId);

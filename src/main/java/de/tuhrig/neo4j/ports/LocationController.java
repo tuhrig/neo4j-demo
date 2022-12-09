@@ -2,7 +2,6 @@ package de.tuhrig.neo4j.ports;
 
 import de.tuhrig.neo4j.domain.location.Location;
 import de.tuhrig.neo4j.domain.location.LocationRepository;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,17 +32,23 @@ public class LocationController {
     }
 
     @PostMapping(path = "/locations", produces = APPLICATION_JSON_VALUE)
-    public Long createLocation(@RequestBody LocationDto dto) {
-        var id = locationRepository.save(dto);
+    public LocationCreatedDto createLocation(@RequestBody CreateLocationDto dto) {
+        var id = locationRepository.save(dto.getStreet(), dto.getHouseNumber(), dto.getCity());
         logger.info("Saved new location. [id={}]", id);
-        return id;
+        var response = new LocationCreatedDto();
+        response.setId(id);
+        return response;
     }
 
-    @AllArgsConstructor
     @Data
-    public static class LocationDto {
+    public static class CreateLocationDto {
         private String street;
         private String houseNumber;
         private String city;
+    }
+
+    @Data
+    public static class LocationCreatedDto {
+        private String id;
     }
 }
