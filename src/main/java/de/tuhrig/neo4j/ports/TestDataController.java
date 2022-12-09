@@ -10,11 +10,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * What to see here:
+ * <p>
+ * - A controller to initialize test data
+ * - Creation of various new nodes
+ */
 @RestController
 @AllArgsConstructor
 public class TestDataController {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LoggerFactory.getLogger(TestDataController.class);
     private final ProductRepository productRepository;
 
     @PutMapping(path = "/init")

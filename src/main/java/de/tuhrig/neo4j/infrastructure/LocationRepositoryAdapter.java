@@ -2,24 +2,22 @@ package de.tuhrig.neo4j.infrastructure;
 
 import de.tuhrig.neo4j.domain.location.Location;
 import de.tuhrig.neo4j.domain.location.LocationRepository;
-import org.springframework.data.neo4j.core.Neo4jTemplate;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * What to see here:
+ * <p>
+ * - A hexagonal architecture pattern (an adapter between domain interface and concrete infrastructure)
+ * - Creation of a new node with returning the generated ID
+ */
 @Service
+@AllArgsConstructor
 public class LocationRepositoryAdapter implements LocationRepository {
 
-    private final Neo4jTemplate neo4jTemplate;
     private final Neo4JLocationRepository neo4JLocationRepository;
-
-    public LocationRepositoryAdapter(
-            Neo4jTemplate neo4jTemplate,
-            Neo4JLocationRepository neo4JLocationRepository
-    ) {
-        this.neo4jTemplate = neo4jTemplate;
-        this.neo4JLocationRepository = neo4JLocationRepository;
-    }
 
     @Override
     public List<Location> findAll() {

@@ -16,6 +16,12 @@ import org.testcontainers.containers.Neo4jContainer;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * What to see here:
+ * <p>
+ * - How to test a Neo4J repository with Testcontainers (Docker)
+ * - Usage of the Lombok builders
+ */
 @DataNeo4jTest
 class ProductRepositoryAdapterTest {
 

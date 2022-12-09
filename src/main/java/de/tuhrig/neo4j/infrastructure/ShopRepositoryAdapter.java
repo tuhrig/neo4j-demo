@@ -7,6 +7,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * What to see here:
+ * <p>
+ * - A hexagonal architecture pattern (an adapter between domain interface and concrete infrastructure)
+ * - A Neo4J query to create a single relation between two existing nodes
+ */
 @Service
 public class ShopRepositoryAdapter implements ShopRepository {
 

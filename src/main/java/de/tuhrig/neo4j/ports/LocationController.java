@@ -2,6 +2,7 @@ package de.tuhrig.neo4j.ports;
 
 import de.tuhrig.neo4j.domain.location.Location;
 import de.tuhrig.neo4j.domain.location.LocationRepository;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,16 +16,11 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
+@AllArgsConstructor
 public class LocationController {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LoggerFactory.getLogger(LocationController.class);
     private final LocationRepository locationRepository;
-
-    public LocationController(
-            LocationRepository locationRepository
-    ) {
-        this.locationRepository = locationRepository;
-    }
 
     @GetMapping(path = "/locations", produces = APPLICATION_JSON_VALUE)
     public List<Location> getLocations() {

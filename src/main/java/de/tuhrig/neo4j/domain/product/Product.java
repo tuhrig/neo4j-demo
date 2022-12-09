@@ -19,15 +19,15 @@ import java.util.Set;
  * - Heavy use of Lombok annotations
  * - Meaningful (domain) methods to interact with the object (soldBy, requires, compatibleWith)
  */
-@Data
 @Node("product")
-@EqualsAndHashCode(onlyExplicitlyIncluded = true) // Just the business key as the identity!
+@Data
 @Builder
-@NoArgsConstructor // Empty constructor required as of Neo4j API 2.0.5
+@NoArgsConstructor // For the Neo4j API
 @AllArgsConstructor // For the builder
+@EqualsAndHashCode(onlyExplicitlyIncluded = true) // Just the business key as the identity!
 public class Product {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LoggerFactory.getLogger(Product.class);
 
     @Id
     @EqualsAndHashCode.Include

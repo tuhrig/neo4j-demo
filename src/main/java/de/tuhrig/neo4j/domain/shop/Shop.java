@@ -11,10 +11,10 @@ import org.springframework.data.neo4j.core.schema.Relationship;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
-@NoArgsConstructor // Empty constructor required as of Neo4j API 2.0.5
 @Node("shop")
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Data
+@NoArgsConstructor // For the Neo4j API
+@EqualsAndHashCode(onlyExplicitlyIncluded = true) // Just the business key as the identity!
 public class Shop {
 
     @Id

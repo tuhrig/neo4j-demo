@@ -6,13 +6,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.neo4j.DataNeo4jTest;
-import org.springframework.data.neo4j.core.Neo4jTemplate;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.Neo4jContainer;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * What to see here:
+ * <p>
+ * - How to test a Neo4J repository with Testcontainers (Docker)
+ */
 @DataNeo4jTest
 class LocationRepositoryAdapterTest {
 
@@ -39,10 +43,9 @@ class LocationRepositoryAdapterTest {
 
     @BeforeEach
     void setUp(
-            @Autowired Neo4jTemplate neo4jTemplate,
             @Autowired Neo4JLocationRepository neo4JLocationRepository
     ) {
-        locationRepository = new LocationRepositoryAdapter(neo4jTemplate, neo4JLocationRepository);
+        locationRepository = new LocationRepositoryAdapter(neo4JLocationRepository);
     }
 
     @Test
