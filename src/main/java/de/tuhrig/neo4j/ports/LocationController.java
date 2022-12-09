@@ -16,16 +16,11 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
+@AllArgsConstructor
 public class LocationController {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LoggerFactory.getLogger(LocationController.class);
     private final LocationRepository locationRepository;
-
-    public LocationController(
-            LocationRepository locationRepository
-    ) {
-        this.locationRepository = locationRepository;
-    }
 
     @GetMapping(path = "/locations", produces = APPLICATION_JSON_VALUE)
     public List<Location> getLocations() {
@@ -33,17 +28,23 @@ public class LocationController {
     }
 
     @PostMapping(path = "/locations", produces = APPLICATION_JSON_VALUE)
-    public Long createLocation(@RequestBody LocationDto dto) {
-        var id = locationRepository.save(dto);
+    public LocationCreatedDto createLocation(@RequestBody CreateLocationDto dto) {
+        var id = locationRepository.save(dto.getStreet(), dto.getHouseNumber(), dto.getCity());
         logger.info("Saved new location. [id={}]", id);
-        return id;
+        var response = new LocationCreatedDto();
+        response.setId(id);
+        return response;
     }
 
-    @AllArgsConstructor
     @Data
-    public static class LocationDto {
+    public static class CreateLocationDto {
         private String street;
         private String houseNumber;
         private String city;
+    }
+
+    @Data
+    public static class LocationCreatedDto {
+        private String id;
     }
 }

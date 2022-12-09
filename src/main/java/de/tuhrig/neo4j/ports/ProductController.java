@@ -2,6 +2,7 @@ package de.tuhrig.neo4j.ports;
 
 import de.tuhrig.neo4j.domain.product.ProductRepository;
 import de.tuhrig.neo4j.domain.product.ProductSummary;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.neo4j.driver.Driver;
 import org.neo4j.driver.Session;
@@ -14,20 +15,18 @@ import java.util.Optional;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+/**
+ * What to see here:
+ * <p>
+ * - A Neo4J query instead of using a repository
+ */
 @RestController
+@AllArgsConstructor
 public class ProductController {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
     private final Driver driver;
     private final ProductRepository productRepository;
-
-    public ProductController(
-            Driver driver,
-            ProductRepository productRepository
-    ) {
-        this.driver = driver;
-        this.productRepository = productRepository;
-    }
 
     @GetMapping(path = "/products", produces = APPLICATION_JSON_VALUE)
     public List<String> getProducts() {

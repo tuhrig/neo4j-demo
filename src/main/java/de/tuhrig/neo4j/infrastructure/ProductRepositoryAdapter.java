@@ -9,6 +9,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+/**
+ * What to see here:
+ * <p>
+ * - A hexagonal architecture pattern (an adapter between domain interface and concrete infrastructure)
+ * - A READ using a projection to only read a subset of the data (not the complete graph)
+ * - A WRITE using a projection to only write a subset of the data (not the complete graph)
+ */
 @Service
 public class ProductRepositoryAdapter implements ProductRepository {
 

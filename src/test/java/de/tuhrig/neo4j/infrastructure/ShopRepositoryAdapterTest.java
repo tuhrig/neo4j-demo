@@ -2,7 +2,6 @@ package de.tuhrig.neo4j.infrastructure;
 
 import de.tuhrig.neo4j.domain.location.LocationRepository;
 import de.tuhrig.neo4j.domain.shop.Shop;
-import de.tuhrig.neo4j.ports.LocationController.LocationDto;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,14 +9,17 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.neo4j.DataNeo4jTest;
 import org.springframework.data.neo4j.core.Neo4jClient;
-import org.springframework.data.neo4j.core.Neo4jTemplate;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.Neo4jContainer;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
+/**
+ * What to see here:
+ * <p>
+ * - How to test a Neo4J repository with Testcontainers (Docker)
+ */
 @DataNeo4jTest
 class ShopRepositoryAdapterTest {
 
@@ -46,19 +48,18 @@ class ShopRepositoryAdapterTest {
     @BeforeEach
     void setUp(
             @Autowired Neo4jClient neo4jClient,
-            @Autowired Neo4jTemplate neo4jTemplate,
             @Autowired Neo4JShopRepository neo4JShopRepository,
             @Autowired Neo4JLocationRepository neo4JLocationRepository
     ) {
         shopRepository = new ShopRepositoryAdapter(neo4jClient, neo4JShopRepository);
-        locationRepository = new LocationRepositoryAdapter(neo4jTemplate, neo4JLocationRepository);
+        locationRepository = new LocationRepositoryAdapter(neo4JLocationRepository);
     }
 
     @Test
     void should_append_existing_location() {
 
         shopRepository.save(new Shop("media_markt", "Media Markt"));
-        var id = locationRepository.save(new LocationDto("Mainstreet", "4", "Karlsruhe"));
+        var id = locationRepository.save("Mainstreet", "4", "Karlsruhe");
 
         shopRepository.appendLocation("media_markt", id);
 

@@ -6,6 +6,11 @@ Neo4J Demo
 This is a simple Java + Spring Boot project which uses Neo4J with Spring Data. The project shows how a simple domain
 model can be implemented with some basic use-cases.
 
+## Note
+
+- To show different approaches, the same thing might be implemented in different ways in the code.
+- I've used comments throughout the code to underline the ideas.
+
 ## What to see here
 
 - Basic project setup (Java + Spring Boot + Neo4J + Spring Data)
@@ -14,6 +19,7 @@ model can be implemented with some basic use-cases.
 - Partial read and write operations using projections
 - Some REST-controllers
 - Tests
+- Use of Lombok for clean code
 
 ## Run locally
 

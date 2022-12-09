@@ -7,6 +7,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * What to see here:
+ * <p>
+ * - A hexagonal architecture pattern (an adapter between domain interface and concrete infrastructure)
+ * - A Neo4J query to create a single relation between two existing nodes
+ */
 @Service
 public class ShopRepositoryAdapter implements ShopRepository {
 
@@ -22,11 +28,11 @@ public class ShopRepositoryAdapter implements ShopRepository {
     }
 
     @Override
-    public void appendLocation(String shopId, Long locationId) {
+    public void appendLocation(String shopId, String locationId) {
         var query = """
                 MATCH (s:shop)
                 MATCH (l:location)
-                WHERE s.id = '%s' AND ID(l) = %s
+                WHERE s.id = '%s' AND l.id = '%s'
                 MERGE (s)-[:LOCATED_AT]->(l)
                 RETURN *
                 """.formatted(shopId, locationId);

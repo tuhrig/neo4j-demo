@@ -4,20 +4,24 @@ import de.tuhrig.neo4j.domain.location.Location;
 import de.tuhrig.neo4j.domain.product.Product;
 import de.tuhrig.neo4j.domain.product.ProductRepository;
 import de.tuhrig.neo4j.domain.shop.Shop;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * What to see here:
+ * <p>
+ * - A controller to initialize test data
+ * - Creation of various new nodes
+ */
 @RestController
+@AllArgsConstructor
 public class TestDataController {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger logger = LoggerFactory.getLogger(TestDataController.class);
     private final ProductRepository productRepository;
-
-    public TestDataController(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
 
     @PutMapping(path = "/init")
     public void init() {
@@ -28,30 +32,40 @@ public class TestDataController {
 
         atu.locatedAt(new Location("Hauptstraße", "1b", "Stuttgart"));
         atu.locatedAt(new Location("Nebenweg", "5", "Karlsruhe"));
-
         edeka.locatedAt(new Location("Hauptstraße", "2b", "Stuttgart"));
-
         mediaMarkt.locatedAt(new Location("Gasse", "42", "Berlin"));
 
-        var dellLaptop = new Product("10001", "Dell Laptop", "Brand new Dell Laptop!");
-        var usbCabel = new Product("20001", "USB Cabel", "USB Cabel (1 meter)");
-        var cleaningSpray = new Product("30001", "Cleaning Spray", "ECO BIO Cleaning Spray");
+        var usbCable = Product.builder()
+                .sku("20001")
+                .name("USB Cabel")
+                .description("USB Cabel (1 meter)")
+                .shop(mediaMarkt)
+                .shop(atu)
+                .build();
 
-        dellLaptop.soldBy(mediaMarkt);
-        dellLaptop.compatibleWith(usbCabel);
+        var dellLaptop = Product.builder()
+                .sku("10001")
+                .name("Dell Laptop")
+                .description("Brand new Dell Laptop!")
+                .shop(mediaMarkt)
+                .compatibleProduct(usbCable)
+                .build();
 
-        usbCabel.soldBy(mediaMarkt);
-        usbCabel.soldBy(atu);
-        usbCabel.requires(dellLaptop);
-        usbCabel.compatibleWith(dellLaptop);
+        var cleaningSpray = Product.builder()
+                .sku("30001")
+                .name("Cleaning Spray")
+                .description("ECO BIO Cleaning Spray")
+                .requiredProduct(dellLaptop)
+                .compatibleProduct(dellLaptop)
+                .shop(mediaMarkt)
+                .shop(edeka)
+                .shop(atu)
+                .build();
 
-        cleaningSpray.soldBy(mediaMarkt);
-        cleaningSpray.soldBy(edeka);
-        cleaningSpray.soldBy(atu);
-        cleaningSpray.compatibleWith(dellLaptop);
+        usbCable.compatibleWith(dellLaptop); // Cyclic dependency between dellLaptop and usbCable
 
         productRepository.save(dellLaptop);
-        productRepository.save(usbCabel);
+        productRepository.save(usbCable);
         productRepository.save(cleaningSpray);
 
         logger.info("Created test data!");
