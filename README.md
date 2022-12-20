@@ -41,3 +41,20 @@ model can be implemented with some basic use-cases.
     With: neo4j / neo4j
 
 See: https://hub.docker.com/_/neo4j
+
+## Example query
+
+Find all products which are sold in "Karlsruhe":
+
+    MATCH (p:product)-[r:SOLD_BY]->(s:shop)
+    WHERE EXISTS {
+        MATCH (s)-[:LOCATED_AT]->(:location {city: 'Karlsruhe'})
+    }
+    RETURN p.name, s.name
+
+Result:
+
+	p.name	         |  s.name
+    -----------------+------------
+    "USB Cabel"	     |  "ATU"
+    "Cleaning Spray" |  "ATU"
